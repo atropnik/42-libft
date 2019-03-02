@@ -1,42 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcat.c                                        :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/02 01:18:51 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/02 03:40:18 by atropnik         ###   ########.fr       */
+/*   Created: 2019/03/02 02:56:44 by atropnik          #+#    #+#             */
+/*   Updated: 2019/03/02 03:41:14 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcat(char *s1, const char *s2)
-{
-	int len;
-	int i;
+#include <string.h>
 
-	i = 0;
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t len;
+	int	i;
+
 	len = 0;
-	while (s1[len] != '\0')
+	i = 0;
+	while (dst[len] != '\0')
 		len++;
-	while (s2[i] != '\0')
+	while (dstsize > 0 && src[i] != '\0')
 	{
-		s1[len + i] = s2[i];
+		dst[len + i] = src[i];
+		dstsize--;
 		i++;
 	}
-	s1[len + i] = '\0';
-	return (s1);
+	dst[len + i] = '\0';
+	return (len + i);
 }
 
-// testing 
+// testing
 
 #include <stdio.h>
 
 int		main()
 {
-	char s1[] = "hello";
-	char s2[] = " there";
+	char s1[] = "chill";
+	char s2[] = " the f out bsd jesus";
 
-	printf("%s\n", ft_strcat(s1, s2));
+	printf("%zu\n", ft_strlcat(s1, s2, 14));
+	printf("%s\n", s1);
 	return (0);
 }
