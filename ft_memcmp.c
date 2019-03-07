@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 22:43:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/06 23:01:43 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/06 23:07:25 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n)
 		i++;
 	return (ns1[i] - ns2[i]);
 }
+
+//testing
 
 #include <stdio.h>
 
