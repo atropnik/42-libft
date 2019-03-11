@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:12:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/08 03:19:02 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/10 21:01:32 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ void	ft_putendl(char const *s);
 void	ft_putnbr(int n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char const *s, int fd);
-void	ft_putend1_fd(char const *s, int fd);
+void	ft_putendl_fd(char const *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 #endif
