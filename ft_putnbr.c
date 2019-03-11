@@ -6,21 +6,48 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 19:12:51 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/08 20:00:14 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/10 23:58:45 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
 void	ft_putnbr(int n)
 {
-	int 	sign;
-	
-	sign = 1;
-	while (n != '\0')
+	if (n == -2147483648)
 	{
-		if (n == '+')
-			;
-		if (n == '-')
-			sign = -sign;
-		if 
+		ft_putchar('-');
+		ft_putchar('2');
+		ft_putnbr(147483648);
 	}
+	if (n == 2147483647)
+	{
+		ft_putchar('2');
+		ft_putnbr(147483648);
+	}
+	if (n < 0)
+	{
+		n = -n;
+		ft_putchar('-');
+	}
+	if (n > 10)
+	{
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
+	}
+	else
+		ft_putchar(n + 48);
+}
+
+// test
+
+int		main()
+{
+	ft_putnbr(-359);
+	return (0);
 }
