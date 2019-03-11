@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 14:12:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/11 04:28:10 by atropnik         ###   ########.fr       */
+/*   Created: 2019/03/11 03:22:46 by atropnik          #+#    #+#             */
+/*   Updated: 2019/03/11 04:33:19 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include <string.h>
+#include <stdlib.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memalloc(size_t size)
 {
-	unsigned char	*ptr;
-	
-	ptr = (unsigned char *)b;
-	while (len-- > 0)
-		*ptr++ = (unsigned char)c;
-	return (b);
+	void	*dest;
+	char	*clean;
+
+	dest = malloc(size);
+	clean = dest;
+	if (dest)
+	{
+		while (size != 0)
+		{
+			*clean++ = 0;
+			size--;
+		}
+		return (dest);
+	}
+	else
+		return (NULL);
 }
 
-// testing 
+char	*ft_strnew(size_t size)
+{
+	return ((char *)ft_memalloc(sizeof(char) * size + 1));
+}
 
+// testing
 #include <stdio.h>
 
 int		main()
 {
-	char s1[] = "This is one very long string";
-	printf("%s\n", s1);
-	ft_memset(s1, '$', 7);
-	printf("%s\n", s1);
+	printf("%s\n", ft_strnew(5));
 	return (0);
 }

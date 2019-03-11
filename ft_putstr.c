@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/12 14:12:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/11 04:28:10 by atropnik         ###   ########.fr       */
+/*   Created: 2019/03/11 01:54:21 by atropnik          #+#    #+#             */
+/*   Updated: 2019/03/11 01:58:04 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include <unistd.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	ft_putstr(char const *s)
 {
-	unsigned char	*ptr;
-	
-	ptr = (unsigned char *)b;
-	while (len-- > 0)
-		*ptr++ = (unsigned char)c;
-	return (b);
+	int		i;
+
+	i = 0;
+	while (s[i])
+		write(1, &s[i++], 1);
 }
 
-// testing 
-
-#include <stdio.h>
+// testing
 
 int		main()
 {
-	char s1[] = "This is one very long string";
-	printf("%s\n", s1);
-	ft_memset(s1, '$', 7);
-	printf("%s\n", s1);
+	ft_putstr("hihi");
 	return (0);
 }
