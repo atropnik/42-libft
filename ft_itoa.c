@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 02:24:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/12 01:44:10 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/12 01:52:22 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		main()
 {
 	printf("%s\n", ft_itoa(-3647));
 	printf("%s\n", ft_itoa(0));
+	printf("%s\n", ft_itoa(555));
 	printf("%s\n", ft_itoa(-2147483648));
 	printf("%s\n", ft_itoa(2147483647));
 	return (0);
