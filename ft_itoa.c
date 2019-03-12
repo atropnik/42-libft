@@ -6,36 +6,29 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 02:24:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/11 19:21:47 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/12 01:44:10 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-// for testing only
-void	*ft_memalloc(size_t size)
+char 	*ft_strdup(const char *s1)
 {
-	void	*dest;
-	char	*clean;
+	int 	i;
+	char 	*new_str;
 
-	dest = malloc(size);
-	clean = dest;
-	if (dest)
-	{
-		while (size != 0)
-		{
-			*clean++ = 0;
-			size--;
-		}
-		return (dest);
-	}
-	else
+	i = 0;
+	while (s1[i] != '\0')
+		++i;
+	if (!(new_str = malloc(sizeof(char) * i + 1)))
 		return (NULL);
-}
-
-char	*ft_strnew(size_t size)
-{
-	return ((char *)ft_memalloc(sizeof(char) * size + 1));
+	new_str[i] = '\0';
+	while (i >= 0)
+	{
+		new_str[i] = s1[i];
+		i--;
+	}
+	return (new_str);
 }
 
 // ACTUAL FUNCS
@@ -47,14 +40,14 @@ static int	num_chars(int n)
 	if (n == 0)
 		i++;
 	if (n < 0)
-		i++;
-	else
 	{
-		while (n > 0)
-		{
-			i++;
-			n = n / 10;
-		}
+		i++;
+		n = -n;
+	}
+	while (n > 0)
+	{
+		i++;
+		n = n / 10;
 	}
 	return (i);
 }
@@ -65,27 +58,21 @@ char		*ft_itoa(int n)
 	int		len;
 
 	if (n == -2147483648)
-		len = 11;
+		return ft_strdup("-2147483648");
 	else
 		len = num_chars(n);
-	result = ft_strnew(len);
-	if (result == NULL)
+	if (!(result = (char *)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	if (n == 0)
-		result[0] = 0;
+		result[0] = '0';
 	if (n < 0)
 	{
 		result[0] = '-';
-		if (n == -2147483648)
-		{
-			result[len-- - 1] = '8';
-			n /= 10;
-		}
 		n = -n;
 	}
 	while (n != 0 && len >= 0)
 	{
-		result[len-- - 1] = n % 10 + 48;
+		result[len-- - 1] = (n % 10) + 48;
 		n /= 10;
 	}
 	return (result);
@@ -97,6 +84,8 @@ char		*ft_itoa(int n)
 
 int		main()
 {
+	printf("%s\n", ft_itoa(-3647));
+	printf("%s\n", ft_itoa(0));
 	printf("%s\n", ft_itoa(-2147483648));
 	printf("%s\n", ft_itoa(2147483647));
 	return (0);
