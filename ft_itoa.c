@@ -6,31 +6,12 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 02:24:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/11 05:10:16 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/11 19:21:47 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static int	num_chars(int n)
-{
-	int		i;
-
-	i = 0;
-	if (n == 0)
-		i++;
-	if (n < 0)
-		i++;
-	else
-	{
-		while (n > 0)
-		{
-			i++;
-			n = n / 10;
-		}
-	}
-	return (i);
-}
 // for testing only
 void	*ft_memalloc(size_t size)
 {
@@ -51,18 +32,42 @@ void	*ft_memalloc(size_t size)
 	else
 		return (NULL);
 }
-// testing only
+
 char	*ft_strnew(size_t size)
 {
 	return ((char *)ft_memalloc(sizeof(char) * size + 1));
 }
-// ACTUAL FUNC
+
+// ACTUAL FUNCS
+static int	num_chars(int n)
+{
+	int		i;
+
+	i = 0;
+	if (n == 0)
+		i++;
+	if (n < 0)
+		i++;
+	else
+	{
+		while (n > 0)
+		{
+			i++;
+			n = n / 10;
+		}
+	}
+	return (i);
+}
+ 
 char		*ft_itoa(int n)
 {
 	char	*result;
 	int		len;
 
-	len = num_chars(n);
+	if (n == -2147483648)
+		len = 11;
+	else
+		len = num_chars(n);
 	result = ft_strnew(len);
 	if (result == NULL)
 		return (NULL);
@@ -93,5 +98,6 @@ char		*ft_itoa(int n)
 int		main()
 {
 	printf("%s\n", ft_itoa(-2147483648));
+	printf("%s\n", ft_itoa(2147483647));
 	return (0);
 }
