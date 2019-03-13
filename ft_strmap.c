@@ -1,44 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 04:11:11 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/13 16:25:44 by atropnik         ###   ########.fr       */
+/*   Created: 2019/03/13 13:54:44 by atropnik          #+#    #+#             */
+/*   Updated: 2019/03/13 15:38:19 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+#include <stdlib.h>
+
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	unsigned int i;
+	char	*result;
+	int		i;
 
 	i = 0;
-	if (f && *f && s && *s)
-	{
-		while (s[i])
-				f(i++, s++);
-	}
+	while (s[i] != '\0')
+		++i;
+	if (!(result = (char *)malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	result[i] = '\0';
+	while (--i >= 0)
+		result[i] = f(s[i]);
+	return (result);
 }
 
 // testing
 
-#include <stdio.h>
-
-void	change_u(unsigned int i, char *s)
+char	replace_r(char s)
 {
-	 if (s[i] == 'u')
-		 s[i] = 'i';
-	 else
-		 s[i] = s[i];
+	if (s == 'r')
+		s = 's';
+	else
+		;
+	return s;
 }
+
+#include <stdio.h>
 
 int		main()
 {
-	char s[] = "y u laughin tho";
+	char s1[] = "deadmouse rox";
 
-	ft_striteri(s, change_u);
-	printf("%s\n", s);
+	printf("%s\n", ft_strmap(s1, replace_r));
 	return (0);
 }
