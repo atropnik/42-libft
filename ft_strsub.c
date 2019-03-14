@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 03:32:05 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/13 21:37:18 by atropnik         ###   ########.fr       */
+/*   Created: 2019/03/14 00:10:18 by atropnik          #+#    #+#             */
+/*   Updated: 2019/03/14 01:05:35 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include <stdlib.h>
 
-void	ft_strdel(char **as)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	if (!as || !*as)
-		return ;
-	free (*as);
-	*as = NULL;	
+	int		i;
+	char	*result;
+
+	i = 0;
+	if (!(result = (char *)malloc(sizeof(char) * len)))
+		return (NULL);
+	while (i <= len)
+	{
+		result[i] = s[start];
+		i++;
+		start++;
+	}
+	return (result);
 }
 
-// obviously testing
+// testing
 
 #include <stdio.h>
 
 int		main()
 {
-	char foo[][4] = {"hel", "sink", "ip"};
-	int i;
-	for (i = 0; i < (sizeof (foo) /sizeof (foo[0])); i++)
-	{
-    	printf("%s\n",foo[i]);
-	}
-	ft_strdel((char **)foo);
+	char s1[] = "abcdefghi";
+	printf("%s\n", ft_strsub(s1, 3, 2));
 	return (0);
 }
