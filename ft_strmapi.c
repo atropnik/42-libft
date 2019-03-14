@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/13 13:54:44 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/13 21:33:09 by atropnik         ###   ########.fr       */
+/*   Created: 2019/03/13 16:31:09 by atropnik          #+#    #+#             */
+/*   Updated: 2019/03/13 21:32:06 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*result;
-	int		i;
+	char				*result;
+	unsigned int		i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -23,20 +23,24 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	if (!(result = (char *)malloc(sizeof(char) * i)))
 		return (NULL);
 	result[i] = '\0';
-	while (--i >= 0)
-		result[i] = (*f)(s[i]);
+	i = 0;
+	while (s[i])
+	{
+		result[i] = f(i, s[i]);
+		i++;
+	}
 	return (result);
 }
 
 // testing
 
-char	replace_r(char s)
+char	replace_r(unsigned int i, char s)
 {
 	if (s == 'r')
 		s = 's';
 	else
 		;
-	return s;
+	return (s);
 }
 
 #include <stdio.h>
@@ -45,6 +49,6 @@ int		main()
 {
 	char s1[] = "deadmouse rox";
 
-	printf("%s\n", ft_strmap(s1, replace_r));
+	printf("%s\n", ft_strmapi(s1, replace_r));
 	return (0);
 }
