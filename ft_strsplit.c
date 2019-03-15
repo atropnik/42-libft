@@ -6,20 +6,16 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 01:50:31 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/14 23:09:46 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/15 03:26:05 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	**ft_strsplit(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
 	int		num_word;
-	char	**result;
 	int		i;
-	int		j;
-	int		k;
-	int		len;
 
 	i = 0;
 	num_word = 0;
@@ -33,11 +29,38 @@ char	**ft_strsplit(char const *s, char c)
 	}
 	if (s[i - 1] == c)
 		num_word -= 1;
-	if (!(result = (char **)malloc(sizeof(char *) * num_word + 1)))
+	return (num_word);
+}
+
+static char	*make_token(int j, int len, char const *s)
+{
+	char	*str;
+	int		k;
+
+	if (!(str = (char *)malloc(sizeof(char) * len + 1)))
+		return (NULL);
+	j = j - len;
+	len = len + j;
+	k = 0;
+	while (j < len)
+		str[k++] = s[j++];
+	str[k] = '\0';
+	return (str);
+}
+
+char		**ft_strsplit(char const *s, char c)
+{
+	char	**result;
+	int		i;
+	int		j;
+	int		len;
+
+	i = count_words(s, c);
+	if (!(result = (char **)malloc(sizeof(char *) * i + 1)))
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (i < num_word)
+	while (s[j])
 	{
 		while (s[j] == c)
 			j++;
@@ -47,18 +70,7 @@ char	**ft_strsplit(char const *s, char c)
 			j++;
 			len++;
 		}
-		if (!(result[i] = (char *)malloc(sizeof(char) * len + 1)))
-			return (NULL);
-		j = j - len;
-		len = len + j;
-		k = 0;
-		while (j < len)
-		{
-			result[i][k] = s[j];
-			j++;
-			k++;
-		}
-		result[i][k] = '\0';
+		result[i] = make_token(j, len, s);
 		i++;
 	}
 	result[i] = NULL;
