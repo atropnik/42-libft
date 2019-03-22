@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 01:38:56 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/22 05:16:48 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/22 07:02:32 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,12 @@ char	*ft_strtrim(char const *s)
 	i = 0;
 	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
 		i++;
-	len = ft_strlen(s);
+	if (s[i] == '\0')
+		return (NULL);
+	len = ft_strlen(s) - 1;
 	while (s[len] == ' ' || s[len] == '\n' || s[len] == '\t')
 		len--;
+	len = len - i + 1;
 	return ft_strsub(s, i, len);
 }
 
@@ -84,8 +87,11 @@ char	*ft_strtrim(char const *s)
 
 int		main()
 {
-	char s1[] = "   such mad success		";
-	printf("%s\n", ft_strsub(s1, 3, 16));
+	char s1[] = "   \t  \n\n \t\t  \n\n\nHello \t  Please\n Trim me !\n   \n \n \t\t\n  ";
+	char s2[] = "  \t \t \n   \n\n\n\t";
+	char s3[] = "";	
 	printf("%s\n", ft_strtrim(s1));
+	printf("%s\n", ft_strtrim(s2));
+	printf("%s\n", ft_strtrim(s3));
 	return (0);
 }

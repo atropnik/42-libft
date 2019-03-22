@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 18:33:11 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/06 19:13:35 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/22 05:26:32 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	if (dst && src)
 	{
 		if ((temp = malloc(len)) == NULL)
-			return (NULL);
+			return ;
 		ft_memcpy(temp, src, len);
 		ft_memcpy(dst, temp, len);
 		free (temp);
