@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 01:50:31 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/15 03:26:05 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/21 23:06:19 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		**ft_strsplit(char const *s, char c)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s[j])
+	while (i < count_words(s, c))
 	{
 		while (s[j] == c)
 			j++;
@@ -98,12 +98,12 @@ void	ft_putstr(char *s)
 
 int		main()
 {
-	char s[] = "**cats**r***my***friends***";
+	char s[] = "        split        this for     me     !      ";
 	char **result;
 	int	 i;
 
 	ft_putstr(s);
-	result = ft_strsplit(s, '*');
+	result = ft_strsplit(s, ' ');
 	write(1, "\n", 1);
 	for (i = 0; result[i] != '\0'; i++) 
 	{

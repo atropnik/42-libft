@@ -6,16 +6,18 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:12:58 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/19 18:12:08 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/20 18:00:31 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define BUF_SIZE 4096
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <fcntl.h>
 
 typedef struct	s_list
 {
