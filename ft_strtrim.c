@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 01:38:56 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/22 07:02:32 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/22 18:05:16 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	size_t		i;
 	char		*result;
 
-	i = -1;
-	if (!(result = ft_strnew(len)))
+	i = 0;
+	if ((!(result = ft_strnew(len))) || !s || !len)
 		return (NULL);
 	s += start;
-	while (++i < len)
+	while (i < len)
+	{
 		result[i] = s[i];
+		i++;
+	}
 	result[i] = '\0';
 	return (result);
 }
