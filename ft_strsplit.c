@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 01:50:31 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/21 23:06:19 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/23 01:28:09 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,21 @@ char		**ft_strsplit(char const *s, char c)
 	int		i;
 	int		j;
 	int		len;
+	int		num_w;
 
-	i = count_words(s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * i + 1)))
+	num_w = count_words(s, c);
+	if (!(result = (char **)malloc(sizeof(char *) * num_w + 1)))
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (i < count_words(s, c))
+	while (i < num_w)
 	{
 		while (s[j] == c)
 			j++;
 		len = 0;
-		while (s[j] != c && s[j] != '\0')
-		{
-			j++;
+		j--;
+		while (s[++j] != c && s[j] != '\0')
 			len++;
-		}
 		result[i] = make_token(j, len, s);
 		i++;
 	}
@@ -102,12 +101,11 @@ int		main()
 	char **result;
 	int	 i;
 
-	ft_putstr(s);
 	result = ft_strsplit(s, ' ');
-	write(1, "\n", 1);
 	for (i = 0; result[i] != '\0'; i++) 
 	{
    		ft_striter(result[i], ft_putstr);
+		ft_putstr("\n");
 	}
 	write(1, "\n", 1);
 	return (0);
