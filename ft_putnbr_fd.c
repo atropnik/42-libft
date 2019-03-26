@@ -6,11 +6,12 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 02:01:12 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/11 02:11:48 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/26 03:50:28 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <string.h>
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -19,36 +20,44 @@ void	ft_putchar_fd(char c, int fd)
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == -2147483648)
-	{
-		ft_putchar_fd('-', fd);
-		ft_putchar_fd('2', fd);
-		ft_putnbr_fd(147483648, fd);
-	}
-	if (n == 2147483647)
-	{
-		ft_putchar_fd('2', fd);
-		ft_putnbr_fd(147483647, fd);
-	}
+	unsigned int i;
+
+	if (!fd)
+		return ;
 	if (n < 0)
 	{
-		n = -n;
 		ft_putchar_fd('-', fd);
-	}
-	if (n > 10)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
+		i = (unsigned int)(n * -1);
 	}
 	else
-		ft_putchar_fd(n + 48, fd);
+		i = (unsigned int)n;
+	if (i >= 10)
+		ft_putnbr_fd(i / 10, fd);
+	ft_putchar_fd((char)(i % 10 + '0'), fd);
 }
 
 // test
 
+#include <stdio.h>
+
 int		main()
 {
-	ft_putnbr_fd(-359, 1);
+	int		p[2];
+	char	buf[100];
+
+	pipe(p);
+	ft_putnbr_fd(0, p[1]);
+	ft_putnbr_fd(1, p[1]);
+	ft_putnbr_fd(-1, p[1]);
+	ft_putnbr_fd(56, p[1]);
+	ft_putnbr_fd(-1230, p[1]);
+	ft_putnbr_fd(10203, p[1]);
+	ft_putnbr_fd(2147483647, p[1]);
+	ft_putnbr_fd(-2147483648, p[1]);
+	buf[read(p[0], buf, 100)] = 0;
+	close(p[0]);
+	close(p[1]);
+	printf("%s\n", buf);
+	printf("%d\n", (strcmp(buf, "01-156-1230102032147483647-2147483648")));
 	return (0);
 }
-
