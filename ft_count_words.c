@@ -6,7 +6,7 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 03:38:30 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/15 04:20:09 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/26 00:35:54 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		ft_count_words(char const *s, char c)
 
 	i = 0;
 	num_word = 0;
+	if (!s || !c)
+		return (num_word);
 	while (s[i] != '\0')
 	{
 		while (s[i] == c)
