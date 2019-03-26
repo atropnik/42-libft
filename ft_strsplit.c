@@ -6,11 +6,12 @@
 /*   By: atropnik <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 01:50:31 by atropnik          #+#    #+#             */
-/*   Updated: 2019/03/23 01:28:09 by atropnik         ###   ########.fr       */
+/*   Updated: 2019/03/26 00:34:09 by atropnik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 
 static int	count_words(char const *s, char c)
 {
@@ -19,6 +20,8 @@ static int	count_words(char const *s, char c)
 
 	i = 0;
 	num_word = 0;
+	if (!s || !c)
+		return (num_word);
 	while (s[i] != '\0')
 	{
 		while (s[i] == c)
@@ -57,7 +60,7 @@ char		**ft_strsplit(char const *s, char c)
 	int		num_w;
 
 	num_w = count_words(s, c);
-	if (!(result = (char **)malloc(sizeof(char *) * num_w + 1)))
+	if (!(result = (char **)malloc(sizeof(char *) * num_w + 1)) || !s || !c)
 		return (NULL);
 	i = 0;
 	j = 0;
@@ -77,6 +80,7 @@ char		**ft_strsplit(char const *s, char c)
 }
 
 // test
+
 
 #include <unistd.h>
 
@@ -98,11 +102,17 @@ void	ft_putstr(char *s)
 int		main()
 {
 	char s[] = "        split        this for     me     !      ";
+	char **ret;
 	char **result;
 	int	 i;
 
+	ft_strsplit(NULL, 0);
+	ft_strsplit(NULL, 'a');
+	ret = ft_strsplit("", '*');
+	if (ret == NULL || ret[0] != NULL)
+		write(1, "your func has return NULL or the first pointer in tab NULL", 59);
 	result = ft_strsplit(s, ' ');
-	for (i = 0; result[i] != '\0'; i++) 
+	for (i = 0; result[i] != '\0'; i++)
 	{
    		ft_striter(result[i], ft_putstr);
 		ft_putstr("\n");
