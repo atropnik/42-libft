@@ -13,7 +13,7 @@
 NAME = libft.a
 HEADER = libft.h
 FLAGS = -Wall -Wextra -Werror -g -fsanitize=undefined,address
-OPTIONS = -c $(SRC) - I $(HEADER)
+OPTIONS = -c $(SRC) -I $(HEADER)
 SRC = *.c
 OBJ = *.o
 
@@ -27,7 +27,7 @@ $(NAME):
 clean:
 	/bin/rm -f $(OBJ)
 
-fclean:
+fclean: clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
