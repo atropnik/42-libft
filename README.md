@@ -1,5 +1,5 @@
 # 42-libft
-Core C funcs for 42 Silicon Valley and beyond
+Core C functions for 42 Silicon Valley and beyond
 
 You will find many already written Mains in with-mains for testing just one file at a time. These mains are not a guarantee of passing - they are just a framework. Testing for extreme cases is up to you.
 
